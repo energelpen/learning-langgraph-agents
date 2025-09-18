@@ -515,7 +515,7 @@ def format_news_results(results: List[FactCheckResult]) -> str:
     for result in results:
         verdict_counts[result.verdict] = verdict_counts.get(result.verdict, 0) + 1
     
-    output += "📊 SUMMARY STATISTICS:\n"
+    output += "SUMMARY STATISTICS:\n"
     output += f"Total Claims Analyzed: {len(results)}\n"
     for verdict, count in verdict_counts.items():
         emoji = verdict_emojis.get(verdict, "❓")
@@ -584,7 +584,7 @@ if __name__ == "__main__":
         print(f"\nTesting claim extraction with sample text:\n{sample_news}\n")
         test_state = NewsFactCheckState(input_text=sample_news)
         test_result = extract_claims_agent(test_state)
-        print(f"\n✅ Extraction test complete. Found {len(test_result.extracted_claims)} claims.")
+        print(f"\nExtraction test complete. Found {len(test_result.extracted_claims)} claims.")
         if test_result.extracted_claims:
             print("\nExtracted claims:")
             for i, claim in enumerate(test_result.extracted_claims, 1):
@@ -599,12 +599,12 @@ if __name__ == "__main__":
         app = create_news_fact_checking_workflow()
         initial_state = NewsFactCheckState(input_text=user_input)
         
-        print("🔄 Running News Fact-Checking Pipeline...\n")
+        print("Running News Fact-Checking Pipeline...\n")
         result = app.invoke(initial_state)
         
         # Display any error messages
         if hasattr(result, 'error_messages') and result.error_messages:
-            print("⚠️ Warnings/Errors:")
+            print("Warnings/Errors:")
             for error in result.error_messages:
                 print(f"  - {error}")
             print()
@@ -638,6 +638,6 @@ if __name__ == "__main__":
                     print(json_output)
                     
     except Exception as e:
-        print(f"❌ Error running fact-checking pipeline: {e}")
+        print(f"Error running fact-checking pipeline: {e}")
         import traceback
         traceback.print_exc()
